@@ -14,11 +14,12 @@ class CreateSiswasTable extends Migration
     public function up()
     {
         Schema::create('siswas', function (Blueprint $table) {
-            $table->bigIncrements('nis');
+            $table->integer('nis')->unique()->primary();
             $table->string('nama');
-            $table->integer('kelas');
-            $table->text('alamat');
-            $table->integer('skor_sebelum');
+            $table->string('tingkat');
+            $table->string('kelas');
+            $table->string('jurusan');                                    
+            $table->string('jenis_kel');
             $table->timestamps();
         });
     }

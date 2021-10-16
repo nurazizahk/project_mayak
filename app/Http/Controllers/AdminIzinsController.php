@@ -5,14 +5,14 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminSiswasController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminIzinsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "nama";
-			$this->limit = "15";
-			$this->orderby = "nis,desc";
+			$this->title_field = "id";
+			$this->limit = "20";
+			$this->orderby = "id_izin,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -20,41 +20,49 @@
 			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
-			$this->button_detail = false;
+			$this->button_detail = true;
 			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = true;
-			$this->table = "siswas";
+			$this->table = "izins";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"NIS","name"=>"nis","width"=>"100"];
-			$this->col[] = ["label"=>"Nama","name"=>"nama","width"=>"100"];
-			$this->col[] = ["label"=>"Tingkat","name"=>"tingkat","width"=>"100"];
-			$this->col[] = ["label"=>"Kelas","name"=>"kelas","width"=>"100"];
-			$this->col[] = ["label"=>"Jurusan","name"=>"jurusan","width"=>"100"];
-			$this->col[] = ["label"=>"Jenis Kelamin","name"=>"jenis_kel","width"=>"100"];
+			$this->col[] = ["label"=>"No","name"=>"id_izin","width"=>"100"];
+			$this->col[] = ["label"=>"NIS","name"=>"nis","join"=>"siswas,nis","width"=>"100"];
+			$this->col[] = ["label"=>"Hari","name"=>"hari","width"=>"100"];
+			$this->col[] = ["label"=>"Tgl","name"=>"tgl","width"=>"100"];
+			$this->col[] = ["label"=>"Jam1","name"=>"jam1","width"=>"100"];
+			$this->col[] = ["label"=>"Jam2","name"=>"jam2","width"=>"100"];
+			$this->col[] = ["label"=>"Keperluan","name"=>"keperluan","width"=>"100"];
+			$this->col[] = ["label"=>"Alasan","name"=>"alasan","width"=>"100"];
+			$this->col[] = ["label"=>"Pemberi Izin","name"=>"pemberi_izin","width"=>"100"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'NIS','name'=>'nis','type'=>'number','validation'=>'required|integer','width'=>'col-sm-9'];
-			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tingkat','name'=>'tingkat','type'=>'select','dataenum'=>'X;XI;XII','validation'=>'required','width'=>'col-sm-9'];
-			$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'select','dataenum'=>'A;B;C;D;E;F;G;H;I;J;K','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Jurusan','name'=>'jurusan','type'=>'select','dataenum'=>'MIPA;IPS;AGAMA','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kel','type'=>'select','dataenum'=>'Laki-laki;Perempuan','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nis','name'=>'nis','type'=>'select','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Hari','name'=>'hari','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Sabtu;Ahad;Senin;Selasa;Rabu;Kamis'];
+			$this->form[] = ['label'=>'Tgl','name'=>'tgl','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Jam1','name'=>'jam1','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			$this->form[] = ['label'=>'Jam2','name'=>'jam2','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			$this->form[] = ['label'=>'Keperluan','name'=>'keperluan','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Masuk/Aktif;Pulang;Keluar;Tidak Masuk'];
+			$this->form[] = ['label'=>'Alasan','name'=>'alasan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Pemberi Izin','name'=>'pemberi_izin','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			//$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'text','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Kelamin','name'=>'kelamin','type'=>'text','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Skor','name'=>'skor','type'=>'number','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Nis','name'=>'nis','type'=>'select','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Hari','name'=>'hari','type'=>'select','dataenum'=>'Sabtu;Ahad;Senin;Selasa;Rabu;Kamis','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Tgl','name'=>'tgl','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Jam1','name'=>'jam1','type'=>'select','dataenum'=>'1;2;3;4;5;6;7;8;9','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Jam2','name'=>'jam2','type'=>'select','dataenum'=>'1;2;3;4;5;6;7;8;9','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Keperluan','name'=>'keperluan','type'=>'select','dataenum'=>'Masuk/Aktif;Pulang;Keluar;Tidak Masuk','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Alasan','name'=>'alasan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Pemberi Izin','name'=>'pemberi_izin','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/* 
@@ -215,6 +223,7 @@
 	        */
 	        $this->load_css = array();
 	        
+	        
 	    }
 
 
@@ -326,6 +335,8 @@
 	        //Your code here
 
 	    }
+
+
 
 	    //By the way, you can still create your own method in here... :) 
 
