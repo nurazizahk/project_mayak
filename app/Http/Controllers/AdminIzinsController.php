@@ -5,13 +5,13 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminSiswasController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminIzinsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "nama";
-			$this->limit = "15";
+			$this->title_field = "id";
+			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
@@ -20,42 +20,46 @@
 			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
-			$this->button_detail = false;
+			$this->button_detail = true;
 			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = true;
-			$this->table = "siswas";
+			$this->table = "izins";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"NIS","name"=>"nis","width"=>"100"];
-			$this->col[] = ["label"=>"Nama","name"=>"nama","width"=>"100"];
-			$this->col[] = ["label"=>"Tingkat","name"=>"tingkat","width"=>"100"];
-			$this->col[] = ["label"=>"Kelas","name"=>"kelas","width"=>"100"];
-			$this->col[] = ["label"=>"Jurusan","name"=>"jurusan","width"=>"100"];
-			$this->col[] = ["label"=>"Jenis Kelamin","name"=>"jenis_kel","width"=>"100"];
+			$this->col[] = ["label"=>"NIS","name"=>"id_siswa","join"=>"siswas,nis","width"=>"100"];
+			$this->col[] = ["label"=>"Nama","name"=>"id_siswa","join"=>"siswas,nama"];
+			$this->col[] = ["label"=>"Tgl","name"=>"tgl","width"=>"100"];
+			$this->col[] = ["label"=>"Mulai jam","name"=>"jam1","width"=>"100"];
+			$this->col[] = ["label"=>"Sampai Jam","name"=>"jam2","width"=>"100"];
+			$this->col[] = ["label"=>"Keperluan","name"=>"id_keperluan","join"=>"keperluans,keperluan","width"=>"100"];
+			$this->col[] = ["label"=>"Alasan","name"=>"alasan","width"=>"100"];
+			$this->col[] = ["label"=>"Pemberi Izin","name"=>"created_by","join"=>"cms_users,name","width"=>"100"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'NIS','name'=>'nis','type'=>'number','validation'=>'required|integer','width'=>'col-sm-9'];
-			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tingkat','name'=>'tingkat','type'=>'select','validation'=>'required','width'=>'col-sm-9','dataenum'=>'X;XI;XII'];
-			$this->form[] = ['label'=>'Jurusan','name'=>'jurusan','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'MIPA;IPS;AGAMA'];
-			$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'A;B;C;D;E;F;G;H;I;J;K'];
-			$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kel','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Laki-laki;Perempuan'];
+			$this->form[] = ['label'=>'Nama','name'=>'id_siswa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'siswas,nama','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Tgl','name'=>'tgl','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Mulai Jam','name'=>'jam1','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			$this->form[] = ['label'=>'Sampai Jam','name'=>'jam2','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			$this->form[] = ['label'=>'Keperluan','name'=>'id_keperluan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'keperluans,keperluan'];
+			$this->form[] = ['label'=>'Alasan','name'=>'alasan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Created By','name'=>'created_by','type'=>'number','validation'=>'required','width'=>'col-sm-9','style'=>'display:none;','readonly'=>'1'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'NIS','name'=>'nis','type'=>'number','validation'=>'required|integer','width'=>'col-sm-9'];
-			//$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Tingkat','name'=>'tingkat','type'=>'select','dataenum'=>'X;XI;XII','validation'=>'required','width'=>'col-sm-9'];
-			//$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'select','dataenum'=>'A;B;C;D;E;F;G;H;I;J;K','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Jurusan','name'=>'jurusan','type'=>'select','dataenum'=>'MIPA;IPS;AGAMA','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kel','type'=>'select','dataenum'=>'Laki-laki;Perempuan','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Nama','name'=>'id_siswa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'siswas,nama','datatable_ajax'=>'true'];
+			//$this->form[] = ['label'=>'Tgl','name'=>'tgl','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Mulai Jam','name'=>'jam1','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			//$this->form[] = ['label'=>'Sampai Jam','name'=>'jam2','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			//$this->form[] = ['label'=>'Keperluan','name'=>'id_keperluan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'keperluans,keperluan'];
+			//$this->form[] = ['label'=>'Alasan','name'=>'alasan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Created By','name'=>'created_by','type'=>'number','validation'=>'required','width'=>'col-sm-9', 'readonly'=>true];
 			# OLD END FORM
 
 			/* 
@@ -85,6 +89,7 @@
 	        | 
 	        */
 	        $this->addaction = array();
+	        $this->addaction[] = ['label'=>'Print','url'=>'','icon'=>'fa fa-check','color'=>'success'];
 
 
 	        /* 
@@ -155,7 +160,15 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+	        $this->script_js = '
+	        if("'.CRUDBooster::getCurrentMethod().'" != "getIndex"){
+	        	$("#id_siswa").change(function(){
+	        		var  created_by = "'.CRUDBooster::myId().'";
+	     			$("#created_by").val(created_by);
+	        	});
+	        }
+	        ';
+
 
 
             /*
@@ -215,6 +228,7 @@
 	        |
 	        */
 	        $this->load_css = array();
+	        
 	        
 	    }
 
@@ -327,6 +341,8 @@
 	        //Your code here
 
 	    }
+
+
 
 	    //By the way, you can still create your own method in here... :) 
 
