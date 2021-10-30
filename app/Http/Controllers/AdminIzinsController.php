@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id_izin,desc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -30,39 +30,36 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"No","name"=>"id_izin","width"=>"100"];
-			$this->col[] = ["label"=>"NIS","name"=>"nis","join"=>"siswas,nis","width"=>"100"];
-			$this->col[] = ["label"=>"Hari","name"=>"hari","width"=>"100"];
+			$this->col[] = ["label"=>"NIS","name"=>"id_siswa","join"=>"siswas,nis","width"=>"100"];
+			$this->col[] = ["label"=>"Nama","name"=>"id_siswa","join"=>"siswas,nama"];
 			$this->col[] = ["label"=>"Tgl","name"=>"tgl","width"=>"100"];
-			$this->col[] = ["label"=>"Jam1","name"=>"jam1","width"=>"100"];
-			$this->col[] = ["label"=>"Jam2","name"=>"jam2","width"=>"100"];
-			$this->col[] = ["label"=>"Keperluan","name"=>"keperluan","width"=>"100"];
+			$this->col[] = ["label"=>"Mulai jam","name"=>"jam1","width"=>"100"];
+			$this->col[] = ["label"=>"Sampai Jam","name"=>"jam2","width"=>"100"];
+			$this->col[] = ["label"=>"Keperluan","name"=>"id_keperluan","join"=>"keperluans,keperluan","width"=>"100"];
 			$this->col[] = ["label"=>"Alasan","name"=>"alasan","width"=>"100"];
-			$this->col[] = ["label"=>"Pemberi Izin","name"=>"pemberi_izin","width"=>"100"];
+			$this->col[] = ["label"=>"Pemberi Izin","name"=>"created_by","join"=>"cms_users,name","width"=>"100"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Nis','name'=>'nis','type'=>'select','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Hari','name'=>'hari','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Sabtu;Ahad;Senin;Selasa;Rabu;Kamis'];
+			$this->form[] = ['label'=>'Nama','name'=>'id_siswa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'siswas,nama','datatable_ajax'=>'true'];
 			$this->form[] = ['label'=>'Tgl','name'=>'tgl','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Jam1','name'=>'jam1','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
-			$this->form[] = ['label'=>'Jam2','name'=>'jam2','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
-			$this->form[] = ['label'=>'Keperluan','name'=>'keperluan','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Masuk/Aktif;Pulang;Keluar;Tidak Masuk'];
+			$this->form[] = ['label'=>'Mulai Jam','name'=>'jam1','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			$this->form[] = ['label'=>'Sampai Jam','name'=>'jam2','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			$this->form[] = ['label'=>'Keperluan','name'=>'id_keperluan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'keperluans,keperluan'];
 			$this->form[] = ['label'=>'Alasan','name'=>'alasan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Pemberi Izin','name'=>'pemberi_izin','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Created By','name'=>'created_by','type'=>'number','validation'=>'required','width'=>'col-sm-9','style'=>'display:none;','readonly'=>'1'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Nis','name'=>'nis','type'=>'select','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Hari','name'=>'hari','type'=>'select','dataenum'=>'Sabtu;Ahad;Senin;Selasa;Rabu;Kamis','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Nama','name'=>'id_siswa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'siswas,nama','datatable_ajax'=>'true'];
 			//$this->form[] = ['label'=>'Tgl','name'=>'tgl','type'=>'date','validation'=>'required|date','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Jam1','name'=>'jam1','type'=>'select','dataenum'=>'1;2;3;4;5;6;7;8;9','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Jam2','name'=>'jam2','type'=>'select','dataenum'=>'1;2;3;4;5;6;7;8;9','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Keperluan','name'=>'keperluan','type'=>'select','dataenum'=>'Masuk/Aktif;Pulang;Keluar;Tidak Masuk','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Mulai Jam','name'=>'jam1','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			//$this->form[] = ['label'=>'Sampai Jam','name'=>'jam2','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','dataenum'=>'1;2;3;4;5;6;7;8;9'];
+			//$this->form[] = ['label'=>'Keperluan','name'=>'id_keperluan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'keperluans,keperluan'];
 			//$this->form[] = ['label'=>'Alasan','name'=>'alasan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Pemberi Izin','name'=>'pemberi_izin','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Created By','name'=>'created_by','type'=>'number','validation'=>'required','width'=>'col-sm-9', 'readonly'=>true];
 			# OLD END FORM
 
 			/* 
@@ -92,6 +89,7 @@
 	        | 
 	        */
 	        $this->addaction = array();
+	        $this->addaction[] = ['label'=>'Print','url'=>'','icon'=>'fa fa-check','color'=>'success'];
 
 
 	        /* 
@@ -162,7 +160,15 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+	        $this->script_js = '
+	        if("'.CRUDBooster::getCurrentMethod().'" != "getIndex"){
+	        	$("#id_siswa").change(function(){
+	        		var  created_by = "'.CRUDBooster::myId().'";
+	     			$("#created_by").val(created_by);
+	        	});
+	        }
+	        ';
+
 
 
             /*

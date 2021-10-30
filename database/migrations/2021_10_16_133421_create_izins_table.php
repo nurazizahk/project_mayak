@@ -14,30 +14,15 @@ class CreateIzinsTable extends Migration
     public function up()
     {
         Schema::create('izins', function (Blueprint $table) {
-            $table->bigIncrements('id_izin');
-            $table->integer('id')->unsigned();
-            $table->integer('nis');
-            $table->string('hari');
+            $table->bigIncrements('id');
+            $table->integer('created_by')->unsigned();
+            $table->integer('id_siswa')->unsigned();
+            $table->integer('id_keperluan')->unsigned();
             $table->date('tgl');
             $table->integer('jam1');
             $table->integer('jam2');
-            $table->string('keperluan');
             $table->string('alasan');
-            $table->string('pemberi_izin');
             $table->timestamps();
-        });
-
-        Schema::table('izins', function($table){
-            $table->foreign('id')
-                ->references('id')
-                ->on('cms_users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-            $table->foreign('nis')
-                ->references('nis')
-                ->on('siswas')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
         });
     }
 

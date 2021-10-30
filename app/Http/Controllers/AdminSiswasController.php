@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "nama";
 			$this->limit = "15";
-			$this->orderby = "nis,desc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -42,19 +42,20 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'NIS','name'=>'nis','type'=>'number','validation'=>'required|integer','width'=>'col-sm-9'];
 			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tingkat','name'=>'tingkat','type'=>'select','dataenum'=>'X;XI;XII','validation'=>'required','width'=>'col-sm-9'];
-			$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'select','dataenum'=>'A;B;C;D;E;F;G;H;I;J;K','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Jurusan','name'=>'jurusan','type'=>'select','dataenum'=>'MIPA;IPS;AGAMA','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kel','type'=>'select','dataenum'=>'Laki-laki;Perempuan','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Tingkat','name'=>'tingkat','type'=>'select','validation'=>'required','width'=>'col-sm-9','dataenum'=>'X;XI;XII'];
+			$this->form[] = ['label'=>'Jurusan','name'=>'jurusan','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'MIPA;IPS;AGAMA'];
+			$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'A;B;C;D;E;F;G;H;I;J;K'];
+			$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kel','type'=>'select','validation'=>'required','width'=>'col-sm-10','dataenum'=>'Laki-laki;Perempuan'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','width'=>'col-sm-10','placeholder'=>'You can only enter the letter only'];
-			//$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'text','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Kelamin','name'=>'kelamin','type'=>'text','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'text','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Skor','name'=>'skor','type'=>'number','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'NIS','name'=>'nis','type'=>'number','validation'=>'required|integer','width'=>'col-sm-9'];
+			//$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Tingkat','name'=>'tingkat','type'=>'select','dataenum'=>'X;XI;XII','validation'=>'required','width'=>'col-sm-9'];
+			//$this->form[] = ['label'=>'Kelas','name'=>'kelas','type'=>'select','dataenum'=>'A;B;C;D;E;F;G;H;I;J;K','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Jurusan','name'=>'jurusan','type'=>'select','dataenum'=>'MIPA;IPS;AGAMA','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kel','type'=>'select','dataenum'=>'Laki-laki;Perempuan','validation'=>'required','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/* 
